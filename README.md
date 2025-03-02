@@ -14,11 +14,6 @@ NBA Data Analysis is a web-based platform that delivers comprehensive insights, 
 - [Project Timeline & Phases](#project-timeline--phases)
 - [Team Members & Roles](#team-members--roles)
 - [Functional & Non-Functional Requirements](#functional--non-functional-requirements)
-- [Risk Management & Communication](#risk-management--communication)
-- [Installation & Setup](#installation--setup)
-- [Usage](#usage)
-- [Contributing](#contributing)
-- [License](#license)
 
 ---
 
