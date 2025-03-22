@@ -1,6 +1,8 @@
 ﻿# NBA Data Analysis Project
 
-NBA Data Analysis is a web-based platform that delivers comprehensive insights, visualizations, and analysis of NBA players’ performance data sourced from Kaggle. The application is designed for basketball enthusiasts, sports analysts, and casual fans to explore player statistics, compare performances, and gain in-depth insights using interactive dashboards and advanced visualizations.
+NBA Data Analysis is a Django-based web application designed for basketball fans who crave real-time NBA updates and in-depth player statistics. By leveraging the power of nba_api and BeautifulSoup, it offers a dynamic and centralized platform where users can explore the latest news, player data, and league insights—all in one place.
+
+![project-logo]([https://github.com/Kudzmat/NoseBleedSection/assets/65554208/ab826d4c-46a3-46d9-b417-e18cb07f45ef](https://github.com/tunahan-oguz/481Project-Gizli-/blob/main/assets/logo.webp))
 
 ---
 
