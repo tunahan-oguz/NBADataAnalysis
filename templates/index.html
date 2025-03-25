@@ -1,0 +1,218 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}
+Home
+{% endblock %}
+
+{% block content %}
+    <div class="text-center mb-5">
+        <h1 class="display-4 fw-bold" style="color: var(--primary-color);">NBA Player Stats</h1>
+        <p class="lead text-muted">Compare your favorite players and explore their statistics</p>
+    </div>
+
+    <div class="row g-4">
+        <!-- Player 1 Card -->
+        <div class="col-lg-6">
+            <div class="card h-100">
+                <div class="card-body">
+                    <div class="text-center mb-4">
+                        <form method="post" class="mb-4">
+                            {% csrf_token %}
+                            {{ player1_form.as_p }}
+                            <button class="btn" type="submit">Search Player</button>
+                        </form>
+                        
+                        {% if player1_image %}
+                        <a href="{% url 'nba_stats:player_details' player_full_name=player1 player_id=player1_id %}" class="d-inline-block">
+                            <img src="{{ player1_image.0 }}" 
+                                 style="background-color: {{ player1_image.1 }}" 
+                                 class="rounded-circle img-fluid mb-3" 
+                                 alt="avatar"
+                                 style="width: 150px; height: 150px; object-fit: cover;">
+                        </a>
+                        {% endif %}
+
+                        {% if player1 %}
+                        <h3 class="fw-bold mb-3" style="color: var(--primary-color);">{{ player1 }}</h3>
+                        
+                        {% if player1_bio %}
+                        <div class="row g-3 text-start">
+                            <div class="col-md-6">
+                                <p class="mb-2"><i class="fa fa-graduation-cap me-2"></i><b>School:</b> {{ player1_bio.school }}</p>
+                                <p class="mb-2"><i class="fa fa-globe me-2"></i><b>Country:</b> {{ player1_bio.country }}</p>
+                            </div>
+                            <div class="col-md-6">
+                                <p class="mb-2"><i class="fa fa-ruler-vertical me-2"></i><b>Height:</b> {{ player1_bio.height }}</p>
+                                <p class="mb-2"><i class="fa fa-weight me-2"></i><b>Weight:</b> {{ player1_bio.weight }}</p>
+                            </div>
+                            <div class="col-md-6">
+                                <p class="mb-2"><i class="fa fa-calendar me-2"></i><b>Year:</b> {{ player1_bio.year }}</p>
+                                <p class="mb-2"><i class="fa fa-hashtag me-2"></i><b>Number:</b> {{ player1_bio.number }}</p>
+                            </div>
+                            <div class="col-md-6">
+                                <p class="mb-2"><i class="fa fa-user me-2"></i><b>Position:</b> {{ player1_bio.position }}</p>
+                                <p class="mb-2"><i class="fa fa-info-circle me-2"></i><b>Status:</b> {{ player1_bio.status }}</p>
+                            </div>
+                        </div>
+
+                        <div class="mt-4">
+                            <h5 class="fw-bold mb-3">Career Statistics</h5>
+                            <div class="row g-3">
+                                <div class="col-4">
+                                    <div class="p-3 bg-light rounded">
+                                        <h6 class="mb-1">PPG</h6>
+                                        <h4 class="mb-0">{{ player1_bio.PTS }}</h4>
+                                    </div>
+                                </div>
+                                <div class="col-4">
+                                    <div class="p-3 bg-light rounded">
+                                        <h6 class="mb-1">RPG</h6>
+                                        <h4 class="mb-0">{{ player1_bio.REB }}</h4>
+                                    </div>
+                                </div>
+                                <div class="col-4">
+                                    <div class="p-3 bg-light rounded">
+                                        <h6 class="mb-1">APG</h6>
+                                        <h4 class="mb-0">{{ player1_bio.AST }}</h4>
+                                    </div>
+                                </div>
+                                <div class="col-6">
+                                    <div class="p-3 bg-light rounded">
+                                        <h6 class="mb-1">STL</h6>
+                                        <h4 class="mb-0">{{ player1_bio.STL }}</h4>
+                                    </div>
+                                </div>
+                                <div class="col-6">
+                                    <div class="p-3 bg-light rounded">
+                                        <h6 class="mb-1">BLK</h6>
+                                        <h4 class="mb-0">{{ player1_bio.BLK }}</h4>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        {% endif %}
+                        {% endif %}
+                    </div>
+
+                    {% if player1 %}
+                    <div class="card-footer bg-transparent border-0 text-center" id="player1-awards">
+                        <button class="btn"
+                                hx-get="{% url 'show_career_awards_player1' player1_name=player1 player1_id=player1_id %}"
+                                hx-target="#player1-awards"
+                                hx-swap="outerHTML"
+                                hx-trigger="click">
+                            <i class="fa fa-trophy me-2"></i>Show Career Awards
+                        </button>
+                    </div>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+
+        <!-- Player 2 Card -->
+        <div class="col-lg-6">
+            <div class="card h-100">
+                <div class="card-body">
+                    <div class="text-center mb-4">
+                        <form method="post" class="mb-4">
+                            {% csrf_token %}
+                            {{ player2_form.as_p }}
+                            <button class="btn" type="submit">Search Player</button>
+                        </form>
+                        
+                        {% if player2_image %}
+                        <a href="{% url 'nba_stats:player_details' player_full_name=player2 player_id=player2_id %}" class="d-inline-block">
+                            <img src="{{ player2_image.0 }}" 
+                                 style="background-color: {{ player2_image.1 }}" 
+                                 class="rounded-circle img-fluid mb-3" 
+                                 alt="avatar"
+                                 style="width: 150px; height: 150px; object-fit: cover;">
+                        </a>
+                        {% endif %}
+
+                        {% if player2 %}
+                        <h3 class="fw-bold mb-3" style="color: var(--primary-color);">{{ player2 }}</h3>
+                        
+                        {% if player2_bio %}
+                        <div class="row g-3 text-start">
+                            <div class="col-md-6">
+                                <p class="mb-2"><i class="fa fa-graduation-cap me-2"></i><b>School:</b> {{ player2_bio.school }}</p>
+                                <p class="mb-2"><i class="fa fa-globe me-2"></i><b>Country:</b> {{ player2_bio.country }}</p>
+                            </div>
+                            <div class="col-md-6">
+                                <p class="mb-2"><i class="fa fa-ruler-vertical me-2"></i><b>Height:</b> {{ player2_bio.height }}</p>
+                                <p class="mb-2"><i class="fa fa-weight me-2"></i><b>Weight:</b> {{ player2_bio.weight }}</p>
+                            </div>
+                            <div class="col-md-6">
+                                <p class="mb-2"><i class="fa fa-calendar me-2"></i><b>Year:</b> {{ player2_bio.year }}</p>
+                                <p class="mb-2"><i class="fa fa-hashtag me-2"></i><b>Number:</b> {{ player2_bio.number }}</p>
+                            </div>
+                            <div class="col-md-6">
+                                <p class="mb-2"><i class="fa fa-user me-2"></i><b>Position:</b> {{ player2_bio.position }}</p>
+                                <p class="mb-2"><i class="fa fa-info-circle me-2"></i><b>Status:</b> {{ player2_bio.status }}</p>
+                            </div>
+                        </div>
+
+                        <div class="mt-4">
+                            <h5 class="fw-bold mb-3">Career Statistics</h5>
+                            <div class="row g-3">
+                                <div class="col-4">
+                                    <div class="p-3 bg-light rounded">
+                                        <h6 class="mb-1">PPG</h6>
+                                        <h4 class="mb-0">{{ player2_bio.PTS }}</h4>
+                                    </div>
+                                </div>
+                                <div class="col-4">
+                                    <div class="p-3 bg-light rounded">
+                                        <h6 class="mb-1">RPG</h6>
+                                        <h4 class="mb-0">{{ player2_bio.REB }}</h4>
+                                    </div>
+                                </div>
+                                <div class="col-4">
+                                    <div class="p-3 bg-light rounded">
+                                        <h6 class="mb-1">APG</h6>
+                                        <h4 class="mb-0">{{ player2_bio.AST }}</h4>
+                                    </div>
+                                </div>
+                                <div class="col-6">
+                                    <div class="p-3 bg-light rounded">
+                                        <h6 class="mb-1">STL</h6>
+                                        <h4 class="mb-0">{{ player2_bio.STL }}</h4>
+                                    </div>
+                                </div>
+                                <div class="col-6">
+                                    <div class="p-3 bg-light rounded">
+                                        <h6 class="mb-1">BLK</h6>
+                                        <h4 class="mb-0">{{ player2_bio.BLK }}</h4>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        {% endif %}
+                        {% endif %}
+                    </div>
+
+                    {% if player2 %}
+                    <div class="card-footer bg-transparent border-0 text-center" id="player2-awards">
+                        <button class="btn"
+                                hx-get="{% url 'show_career_awards_player2' player2_name=player2 player2_id=player2_id %}"
+                                hx-target="#player2-awards"
+                                hx-swap="outerHTML"
+                                hx-trigger="click">
+                            <i class="fa fa-trophy me-2"></i>Show Career Awards
+                        </button>
+                    </div>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+
+    {% if player1 and player2 %}
+    <div class="text-center mt-5">
+        <a href="{% url 'nba_stats:compare_profiles' player1_full_name=player1 player1_id=player1_id player2_full_name=player2 player2_id=player2_id %}" class="btn btn-lg">
+            <i class="fa fa-balance-scale me-2"></i>Compare Players
+        </a>
+    </div>
+    {% endif %}
+{% endblock %}
