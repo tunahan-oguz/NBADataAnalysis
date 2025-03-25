@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}
+About NBA Data Analysis
+{% endblock %}
+
+{% block content %}
+<div class="container my-5">
+    <div class="row align-items-center">
+        <!-- Text Section -->
+        <div class="col-md-6">
+            <h1>About NBA Data Analysis</h1>
+            <hr>
+            <br>
+            <p>
+                Welcome to <strong>NBA Data Analysis</strong> — your companion for diving deep into the numbers behind the game. Built for true fans of basketball, this platform blends the love of the sport with powerful data insights, giving you a fresh way to experience the NBA.
+            </p>
+            <p>
+                Whether you're curious about player matchups, team performances, or season trends, we've created a simple and engaging way to explore it all. From the legends of the past to today’s rising stars, discover stories written in stats — all in one place.
+            </p>
+            <h3>Crafted by Basketball Lovers, for Basketball Lovers.</h3>
+        </div>
+        
+
+        <!-- Image Section -->
+        <div class="col-md-6">
+            <img src="{% static 'images/image.png' %}" alt="About NBA Data Analysis" class="img-fluid">
+        </div>
+    </div>
+</div>
+{% endblock %}
