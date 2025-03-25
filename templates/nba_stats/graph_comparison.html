@@ -1,0 +1,76 @@
+{% extends 'base.html' %}
+{% load humanize %}
+{% load custom_tags %}
+{% load static %}
+{% block title %}
+{{ player1_full_name }} & {{ player2_full_name }} Visual
+{% endblock %}
+
+{% block content %}
+<h1 class="text-center">Player Comparison</h1>
+
+<div class="container mt-4">
+  <div class="row">
+    <!-- Player 1 Card -->
+    <div class="col-md-6 mb-4">
+      <div class="card h-100">
+        <div class="card-body text-center">
+          <h2 class="card-title" style="color: #b4513e;">{{ player1_full_name }}</h2>
+          <a href="{% url 'nba_stats:player_details' player_full_name=player1_full_name player_id=player1_id %}">
+            <img src="{{ player1_headshot.0 }}" alt="{{ player1_full_name }} Headshot" class="rounded-circle img-fluid mt-3 w-75" style="background-color:{{ player1_headshot.1 }};">
+          </a>
+          <h6><b>PPG:</b> {{ player1_bio.PTS }} | <b>RPG:</b> {{ player1_bio.REB }} | <b>APG:</b> {{ player1_bio.AST }}</h6>
+        </div>
+        <!-- Career Awards for Player 1 -->
+        <div class="card-footer text-center" id="player1-awards">
+          <button class="btn btn-outline-success"
+                  hx-get="{% url 'show_career_awards_player1' player1_name=player1_full_name player1_id=player1_id %}"
+                  hx-target="#player1-awards"
+                  hx-swap="outerHTML"
+                  hx-trigger="click">
+            Show Career Awards
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Player 2 Card -->
+    <div class="col-md-6 mb-4">
+      <div class="card h-100">
+        <div class="card-body text-center">
+          <h2 class="card-title" style="color: #b4513e;">{{ player2_full_name }}</h2>
+          <a href="{% url 'nba_stats:player_details' player_full_name=player2_full_name player_id=player2_id %}">
+            <img src="{{ player2_headshot.0 }}" alt="{{ player2_full_name }} Headshot" class="rounded-circle img-fluid mt-3 w-75" style="background-color:{{ player2_headshot.1 }};">
+          </a>
+          <h6><b>PPG:</b> {{ player2_bio.PTS }} | <b>RPG:</b> {{ player2_bio.REB }} | <b>APG:</b> {{ player2_bio.AST }}</h6>
+        </div>
+        <!-- Career Awards for Player 2 -->
+        <div class="card-footer text-center" id="player2-awards">
+          <button class="btn btn-outline-success"
+                  hx-get="{% url 'show_career_awards_player2' player2_name=player2_full_name player2_id=player2_id %}"
+                  hx-target="#player2-awards"
+                  hx-swap="outerHTML"
+                  hx-trigger="click">
+            Show Career Awards
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Graph Section -->
+  <div class="text-center mt-4">
+    <img src="data:image/png;base64,{{ graph }}" alt="Graph" class="img-fluid" style="max-width: 100%; height: auto;">
+  </div>
+
+  <!-- Back to Comparison Button -->
+  <div class="text-center mt-4">
+    <a href="{% url 'nba_stats:compare_profiles' player1_full_name=player1_full_name player1_id=player1_id player2_full_name=player2_full_name player2_id=player2_id %}" class="btn btn-primary">
+      Back To {{ player1_full_name }} / {{ player2_full_name }} Comparison Page
+    </a>
+  </div>
+</div>
+
+{% endblock %}
+
+
