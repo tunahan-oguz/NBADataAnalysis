@@ -107,10 +107,10 @@ Explore NBA Data Analysis easily by:
 
 - **Player Search:** Quickly access detailed statistics and profiles by searching players by name, team, or position.
 ![Player Search](screenshots/player_search.png)
-- **Player Comparison:** Easily compare two players head-to-head across multiple statistical categories, visualizing their performance differences.
-![Player Comparison](screenshots/player_comparison.png)
 - **Data Export:** Conveniently download statistics for any selected player in a user-friendly format.
 ![Export Player Data](screenshots/data_export.png)
+- **Player Comparison:** Easily compare two players head-to-head across multiple statistical categories, visualizing their performance differences.
+![Player Comparison](screenshots/player_comparison.png)
 - **Regular Season and Playoff Statistics:** Explore comprehensive statistical breakdowns tailored to both regular season and playoff performances.
 ![Export Player Data](screenshots/player_statistics1.png)
 ![Export Player Data](screenshots/player_statistics2.png)
