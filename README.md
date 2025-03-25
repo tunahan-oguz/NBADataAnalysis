@@ -110,6 +110,7 @@ Explore NBA Data Analysis easily by:
 ![Export Player Data](screenshots/compare_search.png)
 - **Player Comparison:** Easily compare two players head-to-head across multiple statistical categories, visualizing their performance differences.
 ![Player Comparison](screenshots/player_comparison.png)
+![Player Comparison](screenshots/player_comparison_graph.png)
 - **Regular Season and Playoff Statistics:** Explore comprehensive statistical breakdowns tailored to both regular season and playoff performances.
 ![Export Player Data](screenshots/player_statistics1.png)
 ![Export Player Data](screenshots/player_statistics2.png)
