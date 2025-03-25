@@ -7,6 +7,9 @@ import base64
 from io import BytesIO
 import requests
 import os
+import logging
+import time
+logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
 
 # Proxy configuration
 SMARTPROXY_URL = os.getenv('SMARTPROXY_URL')
@@ -231,7 +234,7 @@ def get_graph(player1_id, player1_name, player2_id, player2_name, stat_category,
         # Certain players (specifically from before 1980) don't have a 3pt %
         if season_data['FG3_PCT'] is None:
             season_data['FG3_PCT'] = 0
-
+    logging.info(f"User selected {player1_name} vs {player2_name} comparison.")
     #  We need to find which player has had the the shorter season between the two
     # The shorter season will be used to plot the x axis
     if len(player1_stats) > len(player2_stats):
@@ -247,7 +250,7 @@ def get_graph(player1_id, player1_name, player2_id, player2_name, stat_category,
     # Extract stat category we are comparing for both players
     player1_numbers = [player1_stats[i][stat_category] for i in range(seasons)]
     player2_numbers = [player2_stats[i][stat_category] for i in range(seasons)]
-
+    start_time = time.time()
     # Create a line chart using Matplotlib
     plt.figure(figsize=(10, 6))
 
@@ -271,7 +274,7 @@ def get_graph(player1_id, player1_name, player2_id, player2_name, stat_category,
     img_data = BytesIO()
     plt.savefig(img_data, format='png')
     plt.close()
-
+    logging.info(f"Chart is ready in {int((time.time() - start_time) * 1000)} milliseconds.")
     # Move the buffer's position to the start
     img_data.seek(0)
     encoded_image = base64.b64encode(img_data.read()).decode("utf-8")

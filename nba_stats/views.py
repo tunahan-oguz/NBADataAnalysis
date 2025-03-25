@@ -3,11 +3,13 @@ from .forms import PlayerSearchForm, StatsDropdownForm, PlayerCompareForm, Stats
 from NBADataAnalysis.functions import *
 from django.http import HttpResponse, HttpResponseRedirect
 import pandas as pd
-
+import logging
+logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
 
 
 def player_details(request, player_full_name, player_id):
     # session info will be from if the user clicks on either player1 or player2 on the home page
+    logging.info("Fetching data from nba_api...")
     player_info = request.session.get("player_info", None)
 
     if player_info:
@@ -24,6 +26,7 @@ def player_details(request, player_full_name, player_id):
         player_headshot = [player_headshot.player_image_url, player_headshot.background_colour]
 
         del player_bio['_state']
+    logging.info("Data successfully retrieved and stored in the database.")
 
     # Get player career stats
     career_stats = player_career_numbers(player_id)
@@ -129,6 +132,7 @@ def player_details(request, player_full_name, player_id):
 # regular season totals
 def regular_season(request, player_full_name, player_id):
     # get session info containing player headshot, bio awards and career stats
+    logging.info("Fetching data from nba_api...")
     player_page_info = request.session.get("player_page_info", None)
 
     if player_page_info:
@@ -148,6 +152,7 @@ def regular_season(request, player_full_name, player_id):
 
         # get player bio
         player_bio = get_player_bio(player_full_name)
+    logging.info("Data successfully retrieved and stored in the database.")
 
     for season_data in player_stats:
 
@@ -203,6 +208,7 @@ def regular_season(request, player_full_name, player_id):
 # post season totals
 def post_season(request, player_full_name, player_id):
     # get session info containing player headshot, bio awards and career stats
+    logging.info("Fetching data from nba_api...")
     player_page_info = request.session.get("player_page_info", None)
 
     if player_page_info:
@@ -222,6 +228,7 @@ def post_season(request, player_full_name, player_id):
 
         # get player bio
         player_bio = get_player_bio(player_full_name)
+    logging.info("Data successfully retrieved and stored in the database.")
 
     for season_data in player_stats:
 
@@ -277,6 +284,7 @@ def post_season(request, player_full_name, player_id):
 # regular season rankings
 def regular_season_rankings(request, player_full_name, player_id):
     # get session info containing player headshot, bio awards and career stats
+    logging.info("Fetching data from nba_api...")
     player_page_info = request.session.get("player_page_info", None)
 
     if player_page_info:
@@ -296,6 +304,8 @@ def regular_season_rankings(request, player_full_name, player_id):
 
         # get player bio
         player_bio = get_player_bio(player_full_name)
+    logging.info("Data successfully retrieved and stored in the database.")
+
 
     # Initialize forms
     player_form = PlayerSearchForm()
@@ -315,6 +325,7 @@ def regular_season_rankings(request, player_full_name, player_id):
 # post season rankings
 def post_season_rankings(request, player_full_name, player_id):
     # get session info containing player headshot, bio awards and career stats
+    logging.info("Fetching data from nba_api...")
     player_page_info = request.session.get("player_page_info", None)
 
     if player_page_info:
@@ -334,6 +345,7 @@ def post_season_rankings(request, player_full_name, player_id):
 
         # get player bio
         player_bio = get_player_bio(player_full_name)
+    logging.info("Data successfully retrieved and stored in the database.")
 
     # Initialize forms
     player_form = PlayerSearchForm()
@@ -401,6 +413,7 @@ def compare_players(request):
 def compare_profiles(request, player1_full_name, player1_id, player2_full_name, player2_id):
     # get players info from session
     # players_info = request.session.get("player_info", None)
+    logging.info("Fetching data from nba_api...")
     player_compare_info = request.session.get('player_compare_info', None)  # info on 2 players from home page
 
     if player_compare_info:
@@ -497,7 +510,7 @@ def compare_profiles(request, player1_full_name, player1_id, player2_full_name, 
             # Certain players (specifically from before 1980) don't have a 3pt %
             if season_data['FG3_PCT'] is None:
                 season_data['FG3_PCT'] = 0
-
+    logging.info("Data successfully retrieved and stored in the database.")
     # stats dropdown form
     form = StatsCompForm()
 
@@ -675,6 +688,7 @@ def update_player_bio(request, player_id, player_name):
 
 
 def export_career_stats(request, player_id, player_full_name):
+    logging.info("Exporting player data to Excel...")
     career_dict = player_career_numbers(player_id)  # Get the career stats dictionary
 
     file_name = f"{player_full_name}_career_stats.xlsx"
@@ -691,11 +705,8 @@ def export_career_stats(request, player_id, player_full_name):
     with open(file_name, 'rb') as file:
         response = HttpResponse(file.read(), content_type='application/vnd.openxmlformats-officedocument.spreadsheetml.sheet')
         response['Content-Disposition'] = f'attachment; filename={file_name}'
-
     # Cleanup: remove the file after serving
     os.remove(file_name)
+    logging.info(f"Export successful: {file_name}")
 
-    # Redirect to the referrer URL after serving the file
-    referer_url = request.META.get('HTTP_REFERER', '/')
-    
     return response
