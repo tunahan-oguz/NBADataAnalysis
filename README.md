@@ -6,7 +6,6 @@ NBA Data Analysis is a dynamic Django web application tailored for basketball en
 
 - [Installation](#installation)
 - [Usage & Features](#usage-&-features)
-- [Technologies Used](#technologies-used)
 - [Overview](#overview)
 - [Objectives](#objectives)
 - [Key Features](#key-features)
