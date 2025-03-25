@@ -48,6 +48,40 @@
                             hx-trigger="click">
                         Show Career Awards
                     </button>
+                    <form id="download-form" method="get" 
+                    action="{% url 'nba_stats:export_career_stats' player_full_name=player_full_name player_id=player_id %}">
+                  <button type="submit" class="btn btn-success mt-2" onclick="handleDownload(event)">Export Career Stats</button>
+              </form>
+              <script>
+                document.addEventListener("DOMContentLoaded", function () {
+                    // Store the referring page in localStorage
+                    if (document.referrer) {
+                        localStorage.setItem("lastPage", document.referrer);
+                    }
+                });
+                
+                function handleDownload(event) {
+                    event.preventDefault();  // Prevent default form submission
+                
+                    var form = document.getElementById("download-form");
+                    var url = form.getAttribute("action");
+                
+                    // Create a hidden link to trigger download
+                    var link = document.createElement("a");
+                    link.href = url;
+                    document.body.appendChild(link);
+                    link.click();
+                    document.body.removeChild(link);
+                
+                    // Retrieve last visited page from localStorage (fallback to home page)
+                    var lastPage = localStorage.getItem("lastPage") || "/";
+                
+                    // Redirect back after 3 seconds
+                    setTimeout(function() {
+                        window.location.href = lastPage;
+                    }, 3000);
+                }
+                </script>
                 </div>
             </div>
         </div>
