@@ -1,8 +1,8 @@
 from django.test import TestCase
 from django.urls import reverse
-from ..models import PlayerBio, CareerAwards, LeagueLeaders, PlayerHeadShot
-from ..forms import PlayerSearchForm, TeamSearchForm, PlayerCompareForm
-from ..functions import player_regular_season, player_post_season
+from .models import PlayerBio, CareerAwards, LeagueLeaders, PlayerHeadShot
+from .forms import PlayerSearchForm, TeamSearchForm, PlayerCompareForm
+from .functions import player_regular_season, player_post_season
 
 class PlayerBioTests(TestCase):
     def setUp(self):
